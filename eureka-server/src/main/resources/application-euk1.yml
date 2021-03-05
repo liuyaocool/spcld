@@ -1,0 +1,21 @@
+server:
+  port: 7001
+eureka:
+  client:
+    # 是否将自己注册到eureka server, 默认true,
+    # 当前是server, 固设置成false, 表明不会向eureka注册自己
+    # 想让别人找到自己 设置成true
+    # register-with-eureka: false
+    # 是否从 eureka server 获取注册信息, 由于单节点, 不需要
+    # 要不要从eureka服务器拉去配置信息
+    # fetch-registry: false
+    # 别人调用的时候 通过哪个端口配
+    service-url:
+      defaultZone: http://euk2.com:7002/eureka/
+  instance:
+    # 表示分组 同一集群的多服务应该一致
+#    appname: euk1.com
+    # 查找主机地址的
+    # 由于此处为本机 所以需要在host文件中添加映射
+    # 如果都是localhost 会被当做一回事
+    hostname: euk1.com
