@@ -1,11 +1,24 @@
+spring:
+  application:
+    name: euk-provider
 server:
   port: 8000
 eureka:
   client:
     service-url:
       defaultZone: http://euk1.com:7000/eureka/
+    # 开启后可以上报服务的真实健康状态  通过/actuator/health端点上报
+    healthcheck:
+      enabled: true
 #    register-with-eureka: true
 #    fetch-registry: true
-spring:
-  application:
-    name: euk-provider
+management:
+  endpoints:
+    web:
+      exposure:
+        # *号开启所有端点 关于端点作用找文档
+        include: "*"
+  endpoint:
+    # 可以远程关闭服务节点
+    shutdown:
+      enabled: true
