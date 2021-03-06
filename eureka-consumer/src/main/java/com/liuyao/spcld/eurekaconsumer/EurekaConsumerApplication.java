@@ -1,4 +1,4 @@
-package com.liuyao.spcld.eurekaconsume;
+package com.liuyao.spcld.eurekaconsumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
