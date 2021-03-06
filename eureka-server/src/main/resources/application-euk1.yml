@@ -13,9 +13,9 @@ eureka:
     service-url:
       defaultZone: http://euk2.com:7002/eureka/
   instance:
-    # 表示分组 同一集群的多服务应该一致
-#    appname: euk1.com
-    # 查找主机地址的
+    # 表示分组 同一集群的多服务应该一致 与spring.application.name一致
+    #    appname: euk1.com
+    # 查找主机地址的 靠这个来找服务的
     # 由于此处为本机 所以需要在host文件中添加映射
     # 如果都是localhost 会被当做一回事
     hostname: euk1.com

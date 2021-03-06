@@ -1,5 +1,5 @@
 spring:
   profiles:
-    active: euk1
+    active: euksingle
   application:
-    name: EurekaServer
+    name: euk-server
