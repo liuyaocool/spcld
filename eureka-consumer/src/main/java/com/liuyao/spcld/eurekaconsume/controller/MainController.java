@@ -1,4 +1,4 @@
-package com.liuyao.spcld.eurekaconsumer.controller;
+package com.liuyao.spcld.eurekaconsume.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.netflix.appinfo.InstanceInfo;
