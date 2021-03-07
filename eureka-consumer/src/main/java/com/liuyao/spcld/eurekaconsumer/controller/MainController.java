@@ -21,13 +21,13 @@ public class MainController {
     @Autowired
     // 抽象 由于注册中心不确定用哪个, spring cloud抽象出了一个接口
     private DiscoveryClient client;
-
     @Autowired
     private EurekaClient client2;
-
     @Autowired
     // 负载均衡器
     private LoadBalancerClient lb;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping("/getHi")
     public String getHi(){
@@ -62,9 +62,10 @@ public class MainController {
         return "clien request";
     }
 
-    @GetMapping("/ribbonReq")
+    @GetMapping("/loadBalanceReq")
     public String a(){
 
+        // 负载均衡策略
         ServiceInstance ins = lb.choose("euk-provider");
         String url = "http://" + ins.getHost() + ":" + ins.getPort() + "/getHi";
         System.out.println("LoadBalancerClient: " + url);
@@ -73,4 +74,18 @@ public class MainController {
         System.out.println("LoadBalancerClient resp: " + reqpStr);
         return "ribbonReq";
     }
+
+
+    @GetMapping("/restTmpReq")
+    public String b(){
+
+        // 负载均衡策略
+        ServiceInstance ins = lb.choose("euk-provider");
+        String url = "http://" + ins.getHost() + ":" + ins.getPort() + "/getHi";
+        String reqpStr = restTemplate.getForObject(url, String.class);
+        return url + ": " + reqpStr;
+    }
+
+
+
 }

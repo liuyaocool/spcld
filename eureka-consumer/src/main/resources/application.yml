@@ -3,7 +3,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://euk1.com:7000/eureka/
+      defaultZone: http://liuyao:123@euk1.com:7000/eureka/
 #    register-with-eureka: true
 #    fetch-registry: true
 spring:
