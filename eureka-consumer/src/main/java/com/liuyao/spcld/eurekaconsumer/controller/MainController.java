@@ -80,7 +80,7 @@ public class MainController {
     }
 
 
-    @GetMapping("/restTmpReq")
+    @GetMapping("/restTmpLbReq")
     public String b(){
 
         // 负载均衡策略
@@ -110,6 +110,7 @@ public class MainController {
     @GetMapping("/autoUrlReq")
     public String d(){
 
+        // euk-provider: 服务主机名
         String url = "http://euk-provider/getHi";
         String reqpStr = autoRestTmp.getForObject(url, String.class);
         return url + ": " + reqpStr;

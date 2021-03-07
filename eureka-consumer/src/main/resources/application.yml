@@ -13,5 +13,5 @@ ribbon:
   # eureka 关了
   eureka:
     enabled: false
-  # 从本地列表中查询
-  listOfServers: localhost:8001
+  # 本地配置服务
+  listOfServers: localhost:8010

@@ -1,5 +1,6 @@
 package com.liuyao.spcld.eurekaconsumer;
 
+import com.liuyao.spcld.eurekaconsumer.interceptor.LoggingClientHttpRequestInterceptor;
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
 import com.netflix.loadbalancer.RetryRule;
@@ -29,7 +30,9 @@ public class EurekaConsumerApplication {
     @Bean(value = "autoRestTemplate")
     @LoadBalanced
     public RestTemplate getAutoRestTemplate(){
-        return new RestTemplate();
+        RestTemplate tmp = new RestTemplate();
+        tmp.getInterceptors().add(new LoggingClientHttpRequestInterceptor());
+        return tmp;
     }
 
 //    // 负载均衡策略
