@@ -5,3 +5,13 @@ spring:
     active: euk
   application:
     name: euk-consumer
+# 配置文件配置负载均衡策略 配置文件大于@Bean配置
+euk-provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+ribbon:
+  # eureka 关了
+  eureka:
+    enabled: false
+  # 从本地列表中查询
+  listOfServers: localhost:8001
