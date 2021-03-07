@@ -1,11 +1,7 @@
 server:
   port: 9000
-eureka:
-  client:
-    service-url:
-      defaultZone: http://liuyao:123@euk1.com:7000/eureka/
-#    register-with-eureka: true
-#    fetch-registry: true
 spring:
+  profiles:
+    active: euk
   application:
     name: euk-consumer

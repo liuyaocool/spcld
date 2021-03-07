@@ -1,17 +1,11 @@
-spring:
-  application:
-    name: euk-provider
 server:
   port: 8000
-eureka:
-  client:
-    service-url:
-      defaultZone: http://liuyao:123@euk1.com:7000/eureka/
-    # 开启后可以上报服务的真实健康状态  通过/actuator/health端点上报
-    healthcheck:
-      enabled: true
-#    register-with-eureka: true
-#    fetch-registry: true
+spring:
+  profiles:
+    active: euk
+  application:
+    name: euk-provider
+# actuator 服务监控 见pom
 management:
   endpoints:
     web:

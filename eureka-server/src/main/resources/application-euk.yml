@@ -28,8 +28,3 @@ eureka:
     #   如 设置一个dalao=liuyao 客户端拿到此服务的元数据后 减少对此服务的调用
     metadata-map:
       dalao: liuyao
-spring:
-  security:
-    user:
-      name: liuyao
-      password: 123
