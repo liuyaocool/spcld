@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController
 public class UPApiController implements UserApi {
@@ -15,9 +16,35 @@ public class UPApiController implements UserApi {
     @Value("${server.port}")
     Integer port;
 
+    AtomicInteger count = new AtomicInteger();
+
     @Override
     public String alive(){
-        return port + ": ok";
+        int i = count.getAndIncrement();
+        return port + ": 第 " + i + " 次调用";
+    }
+
+    @Override
+    public String aliveTimeout() {
+        try {
+            switch (port){
+                case 8100: Thread.sleep(1000); break;
+                case 8101: Thread.sleep(4000); break;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int i = count.getAndIncrement();
+        System.out.println("-------- port:" + port + " 第 " + i + " 次调用----------");
+        return port + ": 第 " + i + " 次调用";
+    }
+
+    @Override
+    public String aliveError() {
+        int i = count.getAndIncrement();
+        System.out.println("-------- port:" + port + " 第 " + i + " 次调用----------");
+        System.out.println(1/0);
+        return port + ": 第 " + i + " 次调用";
     }
 
     @Override
