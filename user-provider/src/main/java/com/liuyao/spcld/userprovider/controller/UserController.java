@@ -9,7 +9,7 @@ public class UserController {
     /**
      * 写一个文档 给谁看? php
      *
-     * 接口写了,只有java的客户端能用, 把
+     * 接口写了(user-api模块UserApi接口),只有java的客户端能用
      *  php来了 再去写文档也行
      *
      *

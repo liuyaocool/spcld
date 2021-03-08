@@ -24,10 +24,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.liuyao.spcld</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>user-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
