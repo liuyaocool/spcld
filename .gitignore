@@ -33,3 +33,7 @@ build/
 .vscode/
 
 rebel.xml
+.rebel.*
+
+mvn*
+.mvn
