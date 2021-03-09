@@ -23,3 +23,16 @@ ribbon:
 feign:
   hystrix:
     enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          # SEMAPHORE:信号量
+          strategy: SEMAPHORE
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
