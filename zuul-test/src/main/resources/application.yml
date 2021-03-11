@@ -7,10 +7,10 @@ eureka:
   client:
     service-url:
       defaultZone: http://euk1.com:7000/eureka/
-# ÅäÖÃÎÄ¼şÅäÖÃ¸ºÔØ¾ùºâ²ßÂÔ ÅäÖÃÎÄ¼ş´óÓÚ@BeanÅäÖÃ
+# é…ç½®æ–‡ä»¶é…ç½®è´Ÿè½½å‡è¡¡ç­–ç•¥ é…ç½®æ–‡ä»¶å¤§äº@Beané…ç½®
 user-consumer:
   ribbon:
-    # RoundRobinRule£ºÄ¬ÈÏÂÖÑ¯
+    # RoundRobinRuleï¼šé»˜è®¤è½®è¯¢
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 management:
   endpoint:
@@ -24,14 +24,14 @@ management:
       exposure:
         include: "*"
 zuul:
-  # Ç°×º localhost:7500/api/v1/user-consumer/alive ÓĞÎÊÌâ
+  # å‰ç¼€ localhost:7500/api/v1/user-consumer/alive æœ‰é—®é¢˜
 #  prefix: /api/v1
-  # ´øÉÏÇ°×ºÇëÇó
+  # å¸¦ä¸Šå‰ç¼€è¯·æ±‚
 #  strip-prefix: false
-  # ºöÂÔÎ¢·şÎñ
+  # å¿½ç•¥å¾®æœåŠ¡
   #ignored-services:
   routes:
-    # ËùÓĞ/xx/**ÏÂµÄÇëÇó¶¼±»×ª·¢µ½url
+    # æ‰€æœ‰/xx/**ä¸‹çš„è¯·æ±‚éƒ½è¢«è½¬å‘åˆ°url
     xx:
       path: /xx/**
       url: https://www.baidu.com
