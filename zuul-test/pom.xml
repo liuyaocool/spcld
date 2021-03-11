@@ -22,14 +22,6 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- 用来上报节点信息 eureka server默认集成 所以不需要引用 -->
-        <!-- 访问: http://localhost:8000/actuator/...  -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-
 
     </dependencies>
 
