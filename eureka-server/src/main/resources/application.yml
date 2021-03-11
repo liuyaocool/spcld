@@ -3,3 +3,15 @@ spring:
     active: euk
   application:
     name: euk-server
+  boot:
+    admin:
+      client:
+        url: http://localhost:8090
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

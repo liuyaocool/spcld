@@ -8,19 +8,25 @@
         <artifactId>root</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>eureka-consumer</artifactId>
-    <name>eureka-consumer</name>
-
-    <properties></properties>
+    <artifactId>admin-test</artifactId>
+    <name>admin-test</name>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- spring cloud admin -->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <version>${spring.boot.admin.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui</artifactId>
+            <version>${spring.boot.admin.version}</version>
         </dependency>
 
     </dependencies>
