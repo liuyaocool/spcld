@@ -5,10 +5,12 @@ spring:
     name: config-server
   cloud:
     config:
+      # http://localhost:9999/consumer-dev.properties
+      # http://localhost:9999/∑÷÷ß/consumer-dev.properties
       server:
         git:
-          uri: https://github.com/liuyaocool/config-center.git
-      label: main
+          uri: https://gitee.com/liuyao_cool/config-center.git
+      label: master
 eureka:
   client:
     service-url:
