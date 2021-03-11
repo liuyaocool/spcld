@@ -33,6 +33,7 @@
         <module>zuul-test</module>
         <module>admin-test</module>
         <module>config-server</module>
+        <module>config-client</module>
         <module>demo</module>
     </modules>
 
