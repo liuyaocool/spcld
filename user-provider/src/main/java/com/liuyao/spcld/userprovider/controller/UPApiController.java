@@ -16,12 +16,35 @@ public class UPApiController implements UserApi {
     @Value("${server.port}")
     Integer port;
 
+    @Value("${spring.application.name}")
+    String appname;
+
     AtomicInteger count = new AtomicInteger();
+
+    private String getAppInfo(){
+        return "{" + appname + ": " + port + "}";
+    }
+
+    /**
+     * 写一个文档 给谁看? php
+     *
+     * 接口写了(user-api模块UserApi接口),只有java的客户端能用
+     *  php来了 再去写文档也行
+     *
+     *
+     * 服务名
+     * 接口名
+     * @return
+     */
+    @GetMapping("/aliveOnly")
+    public String aliveOnly(){
+        return getAppInfo() + "ok; ";
+    }
 
     @Override
     public String alive(){
         int i = count.getAndIncrement();
-        return port + ": 第 " + i + " 次调用";
+        return getAppInfo() + ": 第 " + i + " 次调用; ";
     }
 
     @Override
@@ -36,7 +59,7 @@ public class UPApiController implements UserApi {
         }
         int i = count.getAndIncrement();
         System.out.println("-------- port:" + port + " 第 " + i + " 次调用----------");
-        return port + ": 第 " + i + " 次调用";
+        return getAppInfo() + ": 第 " + i + " 次调用; ";
     }
 
     @Override
@@ -44,25 +67,25 @@ public class UPApiController implements UserApi {
         int i = count.getAndIncrement();
         System.out.println("-------- port:" + port + " 第 " + i + " 次调用----------");
         System.out.println(1/0);
-        return port + ": 第 " + i + " 次调用";
+        return getAppInfo() + "-provider: 第 " + i + " 次调用; ";
     }
 
     @Override
     public String getById(String id) {
-        return port + ": " + id;
+        return getAppInfo() + ": " + id + "; ";
     }
 
     @Override
     public Map<String, Object> getMap(Map<String, Object> map) {
-        map.put("port", port);
-        map.put("method", "getMap-RequestParam");
+        map.put(appname + "_port", port);
+        map.put(appname + "_method", "getMap-RequestParam");
         return map;
     }
 
     @Override
     public Map<String, Object> postMap(Map<String, Object> map) {
-        map.put("port", port);
-        map.put("method", "postMap-RequestBody");
+        map.put(appname + "_port", port);
+        map.put(appname + "_method", "postMap-RequestBody");
         return map;
     }
 
@@ -70,6 +93,7 @@ public class UPApiController implements UserApi {
     public Person postPerson(Person person) {
         person.setPort(port);
         person.setMethodName("postPerson-RequestBody");
+        person.addMsg(getAppInfo() + ":postPerson-RequestBody; ");
         return person;
     }
 

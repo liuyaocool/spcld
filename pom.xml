@@ -29,6 +29,7 @@
         <module>user-provider</module>
         <module>user-consumer</module>
         <module>user-api</module>
+        <module>zuul-test</module>
         <module>demo</module>
     </modules>
 
@@ -38,6 +39,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

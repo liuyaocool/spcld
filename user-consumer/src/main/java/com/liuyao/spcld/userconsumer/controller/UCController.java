@@ -5,6 +5,7 @@ import com.liuyao.spcld.userconsumer.api.ConsumerApi;
 import com.liuyao.spcld.userconsumer.api.UserFeignApi;
 import com.liuyao.spcld.userconsumer.service.RestTempService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -12,6 +13,15 @@ import java.util.Map;
 @RestController
 public class UCController {
 
+    @Value("${server.port}")
+    Integer port;
+    @Value("${spring.application.name}")
+    String appname;
+    
+    private String getAppInfo(){
+        return "{" + appname + ": " + port + "}";
+    }
+    
     @Autowired
     UserFeignApi userFeignApi;
 //    @Autowired
@@ -33,27 +43,27 @@ public class UCController {
 
         // 熔断 连续失败次数达到阈值 一般网络问题
 
-        return userApi.alive();
+        return getAppInfo() + userApi.alive();
     }
 
     @GetMapping("/aliveTimeout")
     public String aliveTimeout(){
-        return userApi.aliveTimeout();
+        return getAppInfo() + userApi.aliveTimeout();
     }
 
     @GetMapping("/aliveRest")
     public String aliveRest(){
-        return rest.alive();
+        return getAppInfo() + rest.alive();
     }
 
     @GetMapping("/aliveRestError")
     public String aliveRestError(){
-        return rest.aliveError();
+        return getAppInfo() + rest.aliveError();
     }
 
     @GetMapping("/aliveRestTimeout")
     public String aliveRestTimeout(){
-        return rest.aliveTimeout();
+        return getAppInfo() + rest.aliveTimeout();
     }
 
 //    @GetMapping("/aliveNoUrl")
@@ -63,22 +73,26 @@ public class UCController {
 
     @GetMapping("/aliveApi")
     public String aliveApi(){
-        return userApi.alive();
+        return getAppInfo() + userApi.alive();
     }
 
     @GetMapping("/apiGetById")
     public String a(String id){
-        return userApi.getById(id);
+        return getAppInfo() + userApi.getById(id);
     }
 
     @GetMapping("/getMap")
     public Map<String, Object> getMap(@RequestParam Map<String, Object> map){
-        return userApi.getMap(map);
+        Map<String, Object> res = userApi.getMap(map);
+        res.put(appname + "_port", port);
+        return res;
     }
 
     @GetMapping("/postMap")
     public Map<String, Object> postMap(@RequestParam Map<String, Object> map){
-        return userApi.postMap(map);
+        Map<String, Object> res = userApi.postMap(map);
+        res.put(appname + "_port", port);
+        return res;
     }
 
     @GetMapping("/postPerson")
@@ -86,6 +100,7 @@ public class UCController {
         Person person = new Person();
         person.setId(map.get("id").toString());
         person.setName(map.get("name").toString());
+        person.addMsg(getAppInfo()+": postPerson;");
         return userApi.postPerson(person);
     }
 }

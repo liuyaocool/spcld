@@ -1,0 +1,14 @@
+server:
+  port: 7100
+spring:
+  application:
+    name: zuul-test
+eureka:
+  client:
+    service-url:
+      defaultZone: http://euk1.com:7000/eureka/
+# 配置文件配置负载均衡策略 配置文件大于@Bean配置
+user-consumer:
+  ribbon:
+    # RoundRobinRule：默认轮询
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

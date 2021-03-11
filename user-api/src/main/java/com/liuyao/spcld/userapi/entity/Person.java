@@ -6,6 +6,16 @@ public class Person {
     String name;
     int port;
     String methodName;
+    String msg;
+
+    public void addMsg(String m) {
+        if (null == m) return;
+        if (null == msg) {
+            this.msg = m;
+        } else {
+            this.msg += m;
+        }
+    }
 
     public String getId() {
         return id;
@@ -37,5 +47,13 @@ public class Person {
 
     public void setMethodName(String methodName) {
         this.methodName = methodName;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }
