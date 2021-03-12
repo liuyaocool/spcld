@@ -3,14 +3,21 @@ server:
 spring:
   application:
     name: config-server
+  profiles:
+    active: native
   cloud:
     config:
       # http://localhost:9999/consumer-dev.properties
       # http://localhost:9999/分支/consumer-dev.properties
       server:
-        git:
-          uri: https://gitee.com/liuyao_cool/config-center.git
-      label: master
+        native:
+          # src/main/resource/configs/**.xxx
+          #   文件命名格式: {客户端spring.application.name}-{profile}.xxx
+          #   使用本地配置需要设置： spring.profiles.active=native
+          search-locations: classpath:configs/
+#        git:
+#          uri: https://gitee.com/liuyao_cool/config-center.git
+#      label: master # natie不管用
 eureka:
   client:
     service-url:
