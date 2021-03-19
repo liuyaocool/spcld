@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>a</title>
+</head>
+<body>
+
+<!-- jsonp -->
+<!-- 静态 此处 get js， js中执行say方法(回调) 则可实现跨域 -->
+<script src="url" ></script>
+<!-- 动态 此处 get js， js中执行callback方法(回调) 则可实现跨域 -->
+<script src="url/aa.js?callback=say" ></script>
+
+<script type="text/javascript">
+    function say(data) {
+
+    }
+    $.load("url", {name: 'xxoo'}, function () {
+
+    })
+</script>
+
+</body>
+</html>

@@ -3,26 +3,38 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.liuyao.spcld</groupId>
-        <artifactId>root</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+    <groupId>com.liuyao.spcld</groupId>
+    <version>0.0.1-SNAPSHOT</version>
     <artifactId>user-api</artifactId>
     <name>user-api</name>
 
-    <properties></properties>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.5</version>
         </dependency>
+
 
     </dependencies>
 
     <build>
-        <plugins></plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

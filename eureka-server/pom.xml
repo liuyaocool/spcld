@@ -40,11 +40,4 @@
 
     </dependencies>
 
-    <dependencyManagement>
-        <dependencies></dependencies>
-    </dependencyManagement>
-
-    <build>
-        <plugins></plugins>
-    </build>
 </project>
