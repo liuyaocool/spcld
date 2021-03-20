@@ -1,7 +1,7 @@
 server:
   port: 81
 spring:
-  security:
-    user:
-      name: liuyao
-      password: 111
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.1.161:3306/springcloud?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
