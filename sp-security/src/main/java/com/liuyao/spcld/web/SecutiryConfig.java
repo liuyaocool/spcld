@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.AuthenticationException;
@@ -35,11 +36,24 @@ import java.util.Collections;
 public class SecutiryConfig extends WebSecurityConfigurerAdapter {
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+//        super.configure(web);
+        // 忽略静态请求 不需要登录
+        //  ? 单字符
+        //  * 0或任意数量字符
+        //  ** 0或更多目录
+        web.ignoring().antMatchers("/img/**");
+
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        super.configure(http);
         http
                 // 哪些地址需要登录
                 .authorizeRequests()
+                // 忽略静态请求 /img下的 不需要登录
+//                .antMatchers("/img/**").permitAll()
                 // 所有请求都需要验证
                 .anyRequest().authenticated()
 
@@ -92,6 +106,10 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     DataSource dataSource;
+    @Autowired
+    MyUserDeatilsService userService;
+    @Autowired
+    MyUserAuth userAuth;
 
     // 权限认账
     @Override
@@ -119,7 +137,12 @@ public class SecutiryConfig extends WebSecurityConfigurerAdapter {
 
 
         // 自定义 ORM
-        auth.userDetailsService(new MyUserDeatilsService());
+        auth.userDetailsService(userService)
+        .and()
+        .authenticationProvider(userAuth)
+
+
+        ;
     }
 
 //
