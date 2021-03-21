@@ -37,6 +37,7 @@
         <module>sp-security</module>
         <module>sp-session</module>
         <module>jwt</module>
+        <module>oauth</module>
         <module>demo</module>
     </modules>
 

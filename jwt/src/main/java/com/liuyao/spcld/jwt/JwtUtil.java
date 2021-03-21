@@ -74,6 +74,7 @@ public class JwtUtil {
 
     // hash(base64(头 + 体) + 密文) = 签名  CAS + jwt
 
+    // jwt.io 标准网站 不是官网
 
     public static void main(String[] args) {
 
