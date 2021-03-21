@@ -36,6 +36,7 @@
         <module>config-client</module>
         <module>sp-security</module>
         <module>sp-session</module>
+        <module>jwt</module>
         <module>demo</module>
     </modules>
 
