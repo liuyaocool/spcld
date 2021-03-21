@@ -35,7 +35,7 @@
         <module>config-server</module>
         <module>config-client</module>
         <module>sp-security</module>
-        <module>web2</module>
+        <module>sp-session</module>
         <module>demo</module>
     </modules>
 
