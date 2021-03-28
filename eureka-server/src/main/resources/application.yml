@@ -1,12 +1,19 @@
 spring:
-  profiles:
-    active: euk
+  ## idea edit configuration中开启
+#  profiles:
+#    active: euk
   application:
     name: euk-server
   boot:
     admin:
       client:
         url: http://localhost:8090
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://eureka-7900:7900/eureka,http://eureka-7901:7901/eureka,http://eureka-7902:7902/eureka
 management:
   endpoints:
     web:
@@ -15,3 +22,31 @@ management:
   endpoint:
     health:
       show-details: always
+
+
+---
+spring:
+  profiles: 7900
+server:
+  port: 7900
+eureka:
+  instance:
+    hostname: eureka-7900
+
+---
+spring:
+  profiles: 7901
+server:
+  port: 7901
+eureka:
+  instance:
+    hostname: eureka-7901
+
+---
+spring:
+  profiles: 7902
+server:
+  port: 7902
+eureka:
+  instance:
+    hostname: eureka-7902
