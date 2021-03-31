@@ -10,12 +10,14 @@ public class UccsController {
     Integer port;
     @Value("${spring.application.name}")
     String appname;
-    @Value("${myconfig}")
+    @Value("${test1}")
     String myconfig;
+    @Value("${test2}")
+    String myconfig2;
 
     @GetMapping("/gitconfig")
     public String gitconfig(){
-        return myconfig;
+        return myconfig + " " + myconfig2;
     }
 
 }

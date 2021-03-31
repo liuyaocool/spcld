@@ -9,7 +9,7 @@ spring:
       #直接URL方式查找配置中心
       uri: http://localhost:9999/
       # 配置文件名字
-      name: seata
+      name: common,seata
       #通过注册中心查找
       profile: dev
       label: master
