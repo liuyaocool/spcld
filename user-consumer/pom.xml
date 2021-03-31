@@ -57,9 +57,8 @@
         </dependency>
 
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.liuyao.spcld</groupId>
             <artifactId>user-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

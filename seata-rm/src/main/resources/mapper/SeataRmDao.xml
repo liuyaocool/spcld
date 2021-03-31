@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuyao.spcld.seatarm.SeataRmDao">
+
+
+
+
+    <insert id="insertRm1" parameterType="com.liuyao.spcld.seatarm.TbSeataRm">
+        insert into tb_rm1 (name) values (#{name, jdbcType=VARCHAR});
+    </insert>
+
+    <insert id="insertRm2" parameterType="com.liuyao.spcld.seatarm.TbSeataRm">
+        insert into tb_rm2 (name) values (#{name, jdbcType=VARCHAR});
+    </insert>
+
+
+</mapper>

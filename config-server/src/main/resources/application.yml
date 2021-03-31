@@ -8,17 +8,17 @@ spring:
   cloud:
     config:
       # http://localhost:9999/consumer-dev.properties
-      # http://localhost:9999/·ÖÖ§/consumer-dev.properties
+      # http://localhost:9999/åˆ†æ”¯/consumer-dev.properties
       server:
         native:
           # src/main/resource/configs/**.xxx
-          #   ÎÄ¼şÃüÃû¸ñÊ½: {¿Í»§¶Ëspring.application.name}-{profile}.xxx
-          #   Ê¹ÓÃ±¾µØÅäÖÃĞèÒªÉèÖÃ£º spring.profiles.active=native
+          #   æ–‡ä»¶å‘½åæ ¼å¼: {å®¢æˆ·ç«¯spring.application.name}-{profile}.xxx
+          #   ä½¿ç”¨æœ¬åœ°é…ç½®éœ€è¦è®¾ç½®ï¼š spring.profiles.active=native
           search-locations: classpath:configs/
 #        git:
 #          uri: https://gitee.com/liuyao_cool/config-center.git
-#      label: master # natie²»¹ÜÓÃ
+#      label: master # natieä¸ç®¡ç”¨
 eureka:
   client:
     service-url:
-      defaultZone: http://euk1.com:7000/eureka
+      defaultZone: http://euk1.com:7901/eureka

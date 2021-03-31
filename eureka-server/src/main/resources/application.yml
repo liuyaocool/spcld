@@ -8,12 +8,12 @@ spring:
     admin:
       client:
         url: http://localhost:8090
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://euk3.com:7903/eureka,http://euk1.com:7901/eureka,http://euk2.com:7902/eureka
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    service-url:
+#      defaultZone: http://euk3.com:7903/eureka,http://euk1.com:7901/eureka,http://euk2.com:7902/eureka
 management:
   endpoints:
     web:
