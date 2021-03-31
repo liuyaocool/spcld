@@ -17,7 +17,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://euk1.com:7000/eureka/
+      defaultZone: http://euk1.com:7901/eureka/
 ribbon:
   # 连接超时 ms
   ConnectTimeout: 1000

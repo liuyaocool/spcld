@@ -13,11 +13,20 @@ public class RestTempService {
 
     @Autowired
     RestTemplate restTemplate;
+    RestTemplate restTemplate2 = new RestTemplate();
 
     @HystrixCommand(defaultFallback = "back")
     public String alive() {
-        String url = "http://user-provider/user/alive";
-        return restTemplate.getForObject(url, String.class);
+        String url = "http://seata-rm1/seata-rm1-at?name=ucat";
+        String rest1 = restTemplate.getForObject(url, String.class);
+        System.out.println("rest1: " + rest1);
+        try {
+            String rest2 = restTemplate2.getForObject(url, String.class);
+            System.out.println("rest2: " + rest2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rest1;
     }
 
     @HystrixCommand(defaultFallback = "back")
