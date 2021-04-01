@@ -1,10 +1,5 @@
 package com.liuyao.spcld.seatarm;
 
-import io.seata.common.loader.EnhancedServiceLoader;
-import io.seata.discovery.registry.FileRegistryServiceImpl;
-import io.seata.discovery.registry.RegistryProvider;
-import io.seata.discovery.registry.RegistryService;
-import io.seata.discovery.registry.RegistryType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

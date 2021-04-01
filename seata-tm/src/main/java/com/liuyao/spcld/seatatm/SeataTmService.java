@@ -24,6 +24,7 @@ public class SeataTmService {
         String rm2 = restTemplate.getForObject(
                 "http://seata-rm2/seata-rm2-at?name=rm2" + name, String.class);
 
+        System.out.println(1/0);
 
         return "success";
     }
