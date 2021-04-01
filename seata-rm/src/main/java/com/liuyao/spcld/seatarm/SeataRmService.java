@@ -31,7 +31,7 @@ public class SeataRmService {
         TbSeataRm tbSeataRm1 = new TbSeataRm();
         tbSeataRm1.setName(name);
         Integer integer = seataRm1Dao.insertRm2(tbSeataRm1);
-//        System.out.println(1/0);
+        System.out.println(1/0);
         if (integer == 1) {
             return "success";
         }
