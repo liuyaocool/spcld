@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+    <script th:inline="javascript">
+        var path = [[${path}]];  //获取request中的值
+        // <![CDATA[
+        // ]]>
+    </script>
+
+</head>
+<body>
+
+
+<div id="form" style="text-align: center;">
+    <input name="username" type="text" value="liuyao"><br>
+    <input name="password" type="password" value="123456"><br>
+    <button type="button" value="登录" onclick="submit()">登录</button>
+    <div id="msg"></div>
+</div>
+
+
+<script type="text/javascript" th:src="@{/jquery-1.12.2.min.js}"></script>
+
+<script type="text/javascript">
+
+    function submit() {
+        $("#msg").html();
+        $.ajax({
+            url : path + "/nonlogin/login",
+            // headers : _opts.headers ,
+            // async: _opts.async,						// 不要异步执行
+            type : 'POST',
+            contentType : 'application/json;charset=UTF-8',
+            dataType : 'json',
+            data : JSON.stringify({
+                username: $("#form [name=username]").val(),
+                password: $("#form [name=password]").val(),
+            }),
+            // dataFilter : function (d){
+            //     if(!d) { return; }
+            //     // var decrypted = JSON.parse(d);
+            //     return d;
+            // },
+            // isEncrypt : _opts.isEncrypt,
+            // beforeSend : _beforeSend,
+            // complete : _complete,
+            success : function (res) {
+                if (res.code == 200) {
+                    location.href = path + "/index/page"
+                } else {
+                    $("#msg").html(res.msg);
+                }
+            },
+            error : function (res, status, xhr) {
+                console.log(res);
+            }
+        });
+
+    }
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.liuyao.spcld.jwt;
+package com.liuyao.spcld.loginjwt.utils;
 
 import java.util.Base64;
 import java.util.Calendar;
@@ -21,12 +21,12 @@ public class JwtUtil {
     /**
      *
      * @param subject
-     * @param issueDate 签发时间
      * @return
      */
-    public static String createToken(String subject, Date issueDate) {
+    public static String createToken(String subject) {
 
-
+        //  签发时间
+        Date issueDate = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(issueDate);
         c.add(Calendar.DAY_OF_MONTH, 20);
@@ -59,6 +59,8 @@ public class JwtUtil {
         }catch (ExpiredJwtException e){
             e.printStackTrace();
             System.out.println("jwt过期了");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return "";
@@ -79,7 +81,7 @@ public class JwtUtil {
     public static void main(String[] args) {
 
         // eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyaWQ9MSxyb2xlPWFkbWluLHByaWNlPTM5OCIsImlhdCI6MTU5MDQxMzk3NywiZXhwIjoxNTkyMTQxOTc3fQ.9cduDuvHXdDv4zLQAqvuVDQO9zQbcfkCaWh1-IkWSWwOf2zruX6-hYOeAm6kdhny1BInmtV1Jd8nnsD03OPpug
-    	String token = createToken("userid=1,role=admin,price=398", new Date());
+    	String token = createToken("userid=1,role=admin,price=398");
     	System.out.println(token);
         System.out.println("-------------------");
 

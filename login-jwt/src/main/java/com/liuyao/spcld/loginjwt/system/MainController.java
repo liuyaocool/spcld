@@ -1,14 +1,15 @@
-package com.liuyao.spcld.jwt;
+package com.liuyao.spcld.loginjwt.system;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RestController
+@Controller("main")
 public class MainController {
 
-    @GetMapping
+    @GetMapping("list")
     public String list(HttpServletRequest req, String msg) {
         req.getSession().setAttribute("msg", msg);
         return "list";

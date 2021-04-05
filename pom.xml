@@ -37,7 +37,7 @@
         <module>config-client</module>
         <module>sp-security</module>
         <module>sp-session</module>
-        <module>jwt</module>
+        <module>login-jwt</module>
         <module>oauth</module>
         <module>dubbo-provider</module>
         <module>dubbo-consumer</module>
