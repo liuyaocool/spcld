@@ -1,6 +1,9 @@
 package com.liuyao.spcld.loginjwt.system;
 
-public class ResBody<T> {
+import java.io.Serializable;
+
+public class ResBody<T> implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private int code;
     private String msg;

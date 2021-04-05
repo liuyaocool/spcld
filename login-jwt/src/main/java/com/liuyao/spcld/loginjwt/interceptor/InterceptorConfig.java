@@ -1,4 +1,4 @@
-package com.liuyao.spcld.loginjwt.config;
+package com.liuyao.spcld.loginjwt.interceptor;
 
 import com.liuyao.spcld.loginjwt.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;

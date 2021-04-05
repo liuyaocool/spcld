@@ -1,12 +1,14 @@
 package com.liuyao.spcld.loginjwt.user;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String username;
-    private String password;
+    private transient String password;
     private List<String> roles;
 
     public User() {
