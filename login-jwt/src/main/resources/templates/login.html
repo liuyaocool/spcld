@@ -6,6 +6,7 @@
 
     <script th:inline="javascript">
         var path = [[${path}]];  //获取request中的值
+        var nonAuth = [[${nonAuthPath}]];
         // <![CDATA[
         // ]]>
     </script>
@@ -29,7 +30,7 @@
     function submit() {
         $("#msg").html();
         $.ajax({
-            url : path + "/nonlogin/login",
+            url : path + nonAuth + "/login",
             // headers : _opts.headers ,
             // async: _opts.async,						// 不要异步执行
             type : 'POST',
@@ -49,7 +50,7 @@
             // complete : _complete,
             success : function (res) {
                 if (res.code == 200) {
-                    location.href = path + "/index/page"
+                    location.href = path ? path : "/";
                 } else {
                     $("#msg").html(res.msg);
                 }

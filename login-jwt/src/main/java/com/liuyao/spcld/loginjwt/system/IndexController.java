@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/index")
+@RequestMapping("")
 public class IndexController {
 
-
-    @GetMapping("/page")
+    @GetMapping("")
     public String index(HttpServletRequest req) {
         return "index";
     }

@@ -1,6 +1,7 @@
 package com.liuyao.spcld.loginjwt.filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -10,6 +11,10 @@ import java.io.IOException;
 
 @Component
 public class NormalFiler implements Filter {
+
+
+    @Value("${auth.not.path}")
+    private String nonAuth;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,6 +27,7 @@ public class NormalFiler implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         request.setAttribute("path", request.getContextPath());
+        request.setAttribute("nonAuthPath", this.nonAuth);
         //继续请求
         filterChain.doFilter(servletRequest, servletResponse);
     }

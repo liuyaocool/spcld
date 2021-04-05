@@ -17,13 +17,13 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
-@RequestMapping("/nonlogin")
+@RequestMapping("${auth.not.path}")
 public class LoginController {
 
     @Autowired
     UserService userService;
 
-    @GetMapping("/login")
+    @GetMapping("") // 此处若为 "/"，则url必须以 / 结尾
     public String list(HttpServletRequest req) {
         return "login";
     }
@@ -57,10 +57,7 @@ public class LoginController {
         token = token.substring(0, token.length()-1) + ";";
         token = JwtUtil.createToken(token);
 
-        Cookie ck = new Cookie("token", token);
-        ck.setPath(req.getContextPath());
-        ck.setMaxAge(Integer.MAX_VALUE);
-        resp.addCookie(ck);
+        setTokenToCookie(resp, Integer.MAX_VALUE, req.getContextPath(), token);
         return new ResBody(200, "success");
     }
 
@@ -68,15 +65,21 @@ public class LoginController {
     public void logout(HttpServletRequest req, HttpServletResponse resp) {
         String path = req.getContextPath();
 
-        Cookie ck = new Cookie("token", null);
-        ck.setMaxAge(0);
-        ck.setPath(path);
-        resp.addCookie(ck);
+        setTokenToCookie(resp, 0, path, null);
 
         try {
             resp.sendRedirect(path);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // 添加token到cookie
+    private void setTokenToCookie(HttpServletResponse resp, int age, String path, String token) {
+        Cookie ck = new Cookie("token", token);
+        ck.setMaxAge(age);
+        ck.setPath(null == path || "".equals(path.trim()) ? "/" : path);
+        resp.addCookie(ck);
+
     }
 }
