@@ -8,8 +8,8 @@
         <artifactId>root</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>zuul-test</artifactId>
-    <name>zuul-test</name>
+    <artifactId>gateway-zuul</artifactId>
+    <name>gateway-zuul</name>
 
     <dependencies>
         <dependency>
@@ -22,6 +22,11 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+        <!-- 配置中心客户端 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
+        </dependency>
 
     </dependencies>
 

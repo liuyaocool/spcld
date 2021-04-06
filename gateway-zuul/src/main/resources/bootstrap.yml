@@ -3,26 +3,17 @@ server:
 spring:
   application:
     name: zuul-test
-eureka:
-  client:
-    service-url:
-      defaultZone: http://euk1.com:7000/eureka/
+  cloud:
+    config:
+      uri: http://localhost:9999/
+      label: master
+      name: common
+      profile: dev
 # 配置文件配置负载均衡策略 配置文件大于@Bean配置
 user-consumer:
   ribbon:
     # RoundRobinRule：默认轮询
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-management:
-  endpoint:
-    health:
-      show-details: always
-      enabled: true
-    routes:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: "*"
 zuul:
   # 前缀 localhost:7500/api/v1/user-consumer/alive 有问题
 #  prefix: /api/v1
@@ -32,6 +23,6 @@ zuul:
   #ignored-services:
   routes:
     # 所有/xx/**下的请求都被转发到url
-    xx:
+    xxx:
       path: /xx/**
       url: https://www.baidu.com

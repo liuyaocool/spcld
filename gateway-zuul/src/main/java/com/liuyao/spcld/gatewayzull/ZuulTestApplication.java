@@ -1,4 +1,4 @@
-package com.liuyao.spcld.zuultest;
+package com.liuyao.spcld.gatewayzull;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
