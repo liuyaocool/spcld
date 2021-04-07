@@ -40,12 +40,11 @@ public class HttpClientByNetty {
     private static final Cache<Channel, CompletableFuture<byte[]>> RESULTS = CacheBuilder.newBuilder()
 //                .maximumSize(2)
             .expireAfterWrite(10, TimeUnit.SECONDS)
-            .removalListener(new RemovalListener<Channel, CompletableFuture<byte[]>>() {
-                @Override
-                public void onRemoval(RemovalNotification<Channel, CompletableFuture<byte[]>> notification) {
-                    notification.getKey().close();
-                }
-            })
+//            .removalListener(new RemovalListener<Channel, CompletableFuture<byte[]>>() {
+//                public void onRemoval(RemovalNotification<Channel, CompletableFuture<byte[]>> notification) {
+//                    notification.getKey().close();
+//                }
+//            })
             .build();
 
     private static final NioEventLoopGroup GROUP = new NioEventLoopGroup(4);
