@@ -120,7 +120,9 @@ public class HttpClientByNetty {
             int finalI = i;
             new Thread(() -> {
                 jsonPost(uri, data);
-                call.accept("thread-" + finalI, getResult());
+                if (null != call) {
+                    call.accept("thread-" + finalI, getResult());
+                }
             }, "thread-" + finalI).start();
         }
     }
