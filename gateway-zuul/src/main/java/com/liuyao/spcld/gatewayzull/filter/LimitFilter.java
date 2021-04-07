@@ -49,7 +49,8 @@ public class LimitFilter extends ZuulFilter {
         String uri = request.getRequestURI();
 
         // 能拿到令牌
-        if (RATE_LIMITER.tryAcquire()){
+//        RATE_LIMITER.acquire(); // 阻塞
+        if (RATE_LIMITER.tryAcquire()){ // 可以拿多个
             System.out.println("令牌通过");
             return null;
         }else {
