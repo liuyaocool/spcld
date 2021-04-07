@@ -1,4 +1,4 @@
-package com.liuyao.spcld.gatewayzull;
+package com.liuyao.spcld.gatewayzull.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -21,6 +21,7 @@ public class TestFilter extends ZuulFilter {
 
 	/**
 	 * 	该过滤器是否生效
+     * 	放到DB中 存储过滤器开关
 	 */
 	@Override
 	public boolean shouldFilter() {
@@ -62,8 +63,7 @@ public class TestFilter extends ZuulFilter {
         String uri = request.getRequestURI();
 //        System.out.println("TestFilter 拦截 来源uri："+uri);
 
-        // 不往下走，还走剩下的过滤器，但是不向后面的服务转发。
-//        requestContext.setSendZuulResponse(false);
+
 //        requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
 //        requestContext.setResponseBody("auth fail");
 

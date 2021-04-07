@@ -1,26 +1,22 @@
-package com.liuyao.spcld.gatewayzull;
+package com.liuyao.spcld.gatewayzull.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
- * 新旧url 路由转换过滤器
- *
- * 配置也可以做，但会穷举好多
- * zuul:
- *   routes:
- *     xxx:
- *       path: /forword1/test
- *       url: http://ip:port/newpath
+ * 根据用户所在地区 路由到不同地区的服务
  */
 @Component
-public class UrlRouteFilter extends ZuulFilter {
+public class AreaRouteFilter extends ZuulFilter {
 
 	// 拦截后的具体业务逻辑
 	@Override
@@ -33,12 +29,27 @@ public class UrlRouteFilter extends ZuulFilter {
 		String remoteAddr = request.getRemoteAddr();
         String uri = request.getRequestURI();
 
-        // http://localhost:7100/user-provider/zuul-alive
-        if (uri.contains("/zuul-alive")) {  // 旧的路径，前端不想修改的
-            System.out.println("UrlRouteFilter 拦截 来源uri："+uri);
+        /**
+         * http://localhost:7100/user-provider/zuul-area-alive
+         *
+         * 网关地址来源：ZuulServerAutoConfiguration.java
+         *  1 zuul从eureka种获得的服务
+         *  2 配置文件中定义
+         *
+         * 404 需要加配置
+         *  zuul:
+         *    routes:
+         *      aa: /zuul-area-alive/**
+         *
+         */
+        if (uri.contains("/zuul-area-alive")) {
+            System.out.println("AreaRouteFilter 拦截 来源uri："+uri);
 
-            ctx.set(FilterConstants.SERVICE_ID_KEY, "user-provider");
-            ctx.set(FilterConstants.REQUEST_URI_KEY, "/user/alive"); // 新服务的地址
+            try {
+                ctx.setRouteHost(new URL("http://localhost:8101/user/alive"));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
 		return null;
 	}
@@ -52,7 +63,7 @@ public class UrlRouteFilter extends ZuulFilter {
 	// 值越小，越在前
 	@Override
 	public int filterOrder() {
-		return 0;
+		return 8;
 	}
 
     // 该过滤器是否生效
