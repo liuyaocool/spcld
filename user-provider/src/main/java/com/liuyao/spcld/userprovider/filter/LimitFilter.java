@@ -1,11 +1,13 @@
 package com.liuyao.spcld.userprovider.filter;
 
 import com.google.common.util.concurrent.RateLimiter;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@Component
 public class LimitFilter implements Filter {
 
     @Override
