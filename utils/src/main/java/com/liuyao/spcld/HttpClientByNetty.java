@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -16,7 +14,6 @@ import io.netty.handler.codec.http.*;
 import io.netty.util.AsciiString;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -46,10 +43,10 @@ public class HttpClientByNetty {
 //                }
 //            })
             .build();
-
+    private static final ThreadLocal<Channel> THREAD_LOCAL = new ThreadLocal();
     private static final NioEventLoopGroup GROUP = new NioEventLoopGroup(4);
     private static final Bootstrap BS = new Bootstrap();
-    static Bootstrap client = BS.group(GROUP)
+    private static final Bootstrap client = BS.group(GROUP)
             .channel(NioSocketChannel.class)
             .handler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
@@ -79,7 +76,6 @@ public class HttpClientByNetty {
                 }
             });
 
-    private ThreadLocal<Channel> tl = new ThreadLocal();
     private String ip;
     private int port;
 
@@ -102,7 +98,7 @@ public class HttpClientByNetty {
             // 连接
             ChannelFuture syncFuture = client.connect(this.ip, this.port).sync();
             Channel ch = syncFuture.channel();
-            tl.set(ch);
+            THREAD_LOCAL.set(ch);
             RESULTS.put(ch, new CompletableFuture<>());
             // 发送
             byte[] data = SerDerUtil.ser(content);
@@ -125,7 +121,10 @@ public class HttpClientByNetty {
 
     public byte[] getResult(){
         try {
-            final Channel ch = tl.get();
+            final Channel ch = THREAD_LOCAL.get();
+            // 此处删除 不然tl不会被GC
+            // 不删除也行 只不过tl会被多个线程引用，后期再释放就难了
+            THREAD_LOCAL.remove();
             byte[] res = RESULTS.getIfPresent(ch).get();
             RESULTS.invalidate(ch);
             ch.close();
