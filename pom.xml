@@ -44,6 +44,7 @@
         <module>seata-tm</module>
         <module>seata-rm</module>
         <module>demo</module>
+        <module>utils</module>
     </modules>
 
 
