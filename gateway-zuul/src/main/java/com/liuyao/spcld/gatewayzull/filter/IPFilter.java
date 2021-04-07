@@ -1,9 +1,9 @@
 package com.liuyao.spcld.gatewayzull.filter;
 
+import com.liuyao.spcld.gatewayzull.config.Constant;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import com.netflix.zuul.http.ZuulServlet;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +16,13 @@ public class IPFilter extends ZuulFilter {
 	public boolean shouldFilter() {
 
         RequestContext ctx = RequestContext.getCurrentContext();
+
+        // 被限流
+        if (ctx.containsKey(Constant.CTX_REQUEST_LIMIT_KEY)
+                && !ctx.getBoolean(Constant.CTX_REQUEST_LIMIT_KEY)) {
+            return false;
+        }
+
         HttpServletRequest request = ctx.getRequest();
 
         String remoteAddr = request.getRemoteAddr();

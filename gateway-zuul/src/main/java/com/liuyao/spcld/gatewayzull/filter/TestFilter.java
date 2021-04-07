@@ -1,5 +1,6 @@
 package com.liuyao.spcld.gatewayzull.filter;
 
+import com.liuyao.spcld.gatewayzull.config.Constant;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -29,6 +30,12 @@ public class TestFilter extends ZuulFilter {
         ZuulServlet zh;
 		//获取上下文
 		RequestContext ctx = RequestContext.getCurrentContext();
+        // 被限流
+        if (ctx.containsKey(Constant.CTX_REQUEST_LIMIT_KEY)
+            && !ctx.getBoolean(Constant.CTX_REQUEST_LIMIT_KEY)) {
+            return false;
+        }
+
 		HttpServletRequest request = ctx.getRequest();
 
         String remoteAddr = request.getRemoteAddr();
@@ -56,7 +63,9 @@ public class TestFilter extends ZuulFilter {
 
 		//获取上下文（重要，贯穿 所有filter，包含所有参数）
 		RequestContext ctx = RequestContext.getCurrentContext();
-		HttpServletRequest request = ctx.getRequest();
+
+
+        HttpServletRequest request = ctx.getRequest();
 
 		String remoteAddr = request.getRemoteAddr();
 
@@ -68,6 +77,10 @@ public class TestFilter extends ZuulFilter {
 //        requestContext.setResponseBody("auth fail");
 
 //        requestContext.set("ifContinue",false);
+
+
+        // 设置过滤器不执行
+        ctx.set("UrlRouteFilter", false);
 
 		return null;
 	}

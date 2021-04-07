@@ -1,5 +1,6 @@
 package com.liuyao.spcld.gatewayzull.filter;
 
+import com.liuyao.spcld.gatewayzull.config.Constant;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -8,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -17,6 +16,19 @@ import java.net.URL;
  */
 @Component
 public class AreaRouteFilter extends ZuulFilter {
+
+    // 该过滤器是否生效
+    @Override
+    public boolean shouldFilter() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        // 被限流
+        if (ctx.containsKey(Constant.CTX_REQUEST_LIMIT_KEY)
+                && !ctx.getBoolean(Constant.CTX_REQUEST_LIMIT_KEY)) {
+            return false;
+        }
+
+        return true;
+    }
 
 	// 拦截后的具体业务逻辑
 	@Override
@@ -66,10 +78,5 @@ public class AreaRouteFilter extends ZuulFilter {
 		return 8;
 	}
 
-    // 该过滤器是否生效
-    @Override
-    public boolean shouldFilter() {
-        return true;
-    }
 
 }

@@ -1,9 +1,9 @@
 package com.liuyao.spcld.gatewayzull.filter;
 
+import com.liuyao.spcld.gatewayzull.config.Constant;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,21 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class UrlRouteFilter extends ZuulFilter {
 
-	// 拦截后的具体业务逻辑
+
+    // 该过滤器是否生效
+    @Override
+    public boolean shouldFilter() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        // 被限流
+        if (ctx.containsKey(Constant.CTX_REQUEST_LIMIT_KEY)
+                && !ctx.getBoolean(Constant.CTX_REQUEST_LIMIT_KEY)) {
+            return false;
+        }
+
+        return ctx.getBoolean("UrlRouteFilter");
+    }
+
+    // 拦截后的具体业务逻辑
 	@Override
 	public Object run() throws ZuulException {
 
@@ -54,11 +68,5 @@ public class UrlRouteFilter extends ZuulFilter {
 	public int filterOrder() {
 		return 9;
 	}
-
-    // 该过滤器是否生效
-    @Override
-    public boolean shouldFilter() {
-        return true;
-    }
 
 }
