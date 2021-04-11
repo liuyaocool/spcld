@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd"
+>
+
+    <bean id="logUtil" class="com.liuyao.spcld.springall.util.LogUtil"></bean>
+    <bean id="myAop" class="com.liuyao.spcld.springall.util.MyAop"></bean>
+    <bean id="myCalculator" class="com.liuyao.spcld.springall.service.MyCalculator"></bean>
+
+    <aop:config>
+        <aop:pointcut id="globalPointCut" expression="execution(* com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))"/>
+        <aop:aspect ref="logUtil">
+            <!-- 抽象 公共 切入表达式 -->
+            <aop:pointcut id="abPointCut" expression="execution(* com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))"/>
+            <aop:before method="before" pointcut-ref="abPointCut"></aop:before>
+            <aop:after method="after" pointcut-ref="abPointCut"></aop:after>
+            <aop:after-returning method="afterReturning" returning="result" pointcut-ref="abPointCut"></aop:after-returning>
+            <aop:after-throwing method="error" throwing="e" pointcut-ref="abPointCut"></aop:after-throwing>
+            <aop:around method="around" pointcut-ref="abPointCut"></aop:around>
+        </aop:aspect>
+        <aop:aspect ref="myAop">
+            <aop:before method="before" pointcut-ref="abPointCut"></aop:before>
+            <aop:after method="after" pointcut="execution(* com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))"></aop:after>
+            <aop:after-returning method="afterReturning" returning="result" pointcut-ref="globalPointCut"></aop:after-returning>
+            <aop:after-throwing method="error" throwing="e" pointcut="execution(* com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))"></aop:after-throwing>
+            <aop:around method="around" pointcut="execution(* com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))"></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>
