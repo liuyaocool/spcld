@@ -1,9 +1,9 @@
-package com.liuyao.spcld.springall.service;
+package com.liuyao.spcld.springall.proxy;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyCalculator /*implements Calculator*/ {
+public class MyCalculator implements Calculator {
 
     public Integer add(Integer i, Integer j) {
         Integer result = i + j;

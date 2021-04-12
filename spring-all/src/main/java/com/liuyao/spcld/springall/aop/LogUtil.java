@@ -1,4 +1,4 @@
-package com.liuyao.spcld.springall.util;
+package com.liuyao.spcld.springall.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -7,7 +7,6 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
 
 @Aspect
@@ -60,7 +59,7 @@ public class LogUtil {
      */
 
     // 抽象
-    @Pointcut("execution(* com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))")
+    @Pointcut("execution(* com.liuyao.spcld.springall.proxy.MyCalculator.*(Integer, Integer))")
     public void myPointCut() { }
 
     @Pointcut("execution(* *(..))")
@@ -84,13 +83,13 @@ public class LogUtil {
     }
 
     @AfterThrowing(throwing = "e",
-            value = "execution(public Integer com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))")
+            value = "execution(public Integer com.liuyao.spcld.springall.proxy.MyCalculator.*(Integer, Integer))")
     public void error(JoinPoint jp, Exception e) {
         System.out.println("LogUtil-@AfterThrowing → 方法执行报错：" + e.getMessage());
     }
 
     @AfterReturning(returning = "result",
-            value = "execution(public Integer com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))")
+            value = "execution(public Integer com.liuyao.spcld.springall.proxy.MyCalculator.*(Integer, Integer))")
     public void afterReturning(JoinPoint jp, Object result) {
         System.out.println("LogUtil-@AfterReturning → 方法执行结束，结果是：" + result);
     }

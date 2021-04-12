@@ -1,4 +1,4 @@
-package com.liuyao.spcld.springall.service;
+package com.liuyao.spcld.springall.proxy;
 
 public interface Calculator {
 

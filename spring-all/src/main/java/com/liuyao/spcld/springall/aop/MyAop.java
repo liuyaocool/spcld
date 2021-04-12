@@ -1,4 +1,4 @@
-package com.liuyao.spcld.springall.util;
+package com.liuyao.spcld.springall.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 @Order(1)
 public class MyAop {
 
-    @Pointcut("execution(* com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))")
+    @Pointcut("execution(* com.liuyao.spcld.springall.proxy.MyCalculator.*(Integer, Integer))")
     public void myPointCut() { }
 
     @Pointcut("execution(* *(..))")
@@ -33,13 +33,13 @@ public class MyAop {
     }
 
     @AfterThrowing(throwing = "e",
-            value = "execution(public Integer com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))")
+            value = "execution(public Integer com.liuyao.spcld.springall.proxy.MyCalculator.*(Integer, Integer))")
     public void error(JoinPoint jp, Exception e) {
         System.out.println("MyAop-@AfterThrowing → 方法执行报错：" + e.getMessage());
     }
 
     @AfterReturning(returning = "result",
-            value = "execution(public Integer com.liuyao.spcld.springall.service.MyCalculator.*(Integer, Integer))")
+            value = "execution(public Integer com.liuyao.spcld.springall.proxy.MyCalculator.*(Integer, Integer))")
     public void afterReturning(JoinPoint jp, Object result) {
         System.out.println("MyAop-@AfterReturning → 方法执行结束，结果是：" + result);
     }
