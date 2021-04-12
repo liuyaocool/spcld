@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+
+">
+
+    <!-- 注解自动装配
+    @Component 组件 任意
+    @Controller 控制层
+    @Service 业务层
+    @Repository 数据层
+    -->
+
+    <!-- 配置扫描包 需导入context命名空间 -->
+    <context:component-scan base-package="com.liuyao.spcld.springall.anno">
+
+        <!--
+        排除一般用在第三方包中的注解
+        type
+            assignable: 全类名限定
+            annotation: 注解全类名限定
+            regex：正则
+            aspectj：切面方式
+            custom：自定义方式，
+        -->
+
+<!--        <context:include-filter type="" expression=""/>-->
+<!--        <context:exclude-filter type="" expression=""/>-->
+    </context:component-scan>
+
+
+</beans>
