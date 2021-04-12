@@ -7,7 +7,7 @@ public class Auth {
     private String roleName;
 
     public Auth() {
-        System.out.println("auth created");
+//        System.out.println("auth created");
     }
 
     public Integer getRoleId() {

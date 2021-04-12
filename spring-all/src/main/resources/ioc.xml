@@ -126,4 +126,22 @@
         <property name="name" value="son"></property>
     </bean>
 
+    <!--
+    设置bean对象的作用域
+    scope 属性
+        singleton 单例
+        prototype 多例 从IOC容器中获取实例 每次都新创建
+        request 每次发送请求都是一个新对象 砍了
+        session 每一个会话一个新对象 砍了
+
+    单例：创建ioc容器完成之前 此对象已经创建完成
+    多例：用到的时候才会创建
+    -->
+    <bean id="person6" class="com.liuyao.spcld.springall.eneity.Person" scope="prototype">
+        <!-- 使用的是set方法 -->
+        <property name="id" value="1"></property>
+        <property name="name" value="person6"></property>
+        <property name="age" value="55"></property>
+    </bean>
+
 </beans>
