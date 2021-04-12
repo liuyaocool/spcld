@@ -19,10 +19,15 @@ public class IOCTest {
 //        getBean("person5");
 //        getBean("son");
 //        getBean("parent");
-        final Person person6 = getBean("person6");
-        final Person person61 = getBean("person6");
-        System.out.println(person6 == person61);
+//        System.out.println(getBean("person6") == getBean("person6");
 
+//        getBean("personStaticFac");
+//        getBean("personInstanceFac");
+
+//        getBean("myFactoryBean");
+        getBean("person7");
+
+//        ctx.close();
 //        getBean2("person");
 //        getBean2("auth", Auth.class);
 

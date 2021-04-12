@@ -20,6 +20,14 @@ public class Person {
 //        System.out.println("person created");
     }
 
+    public void init() {
+        System.out.println(this.name + " person init");
+    }
+
+    public void destroy() {
+        System.out.println(this.name + " person destroy");
+    }
+
     public Person(String name) {
         this.name = name;
     }

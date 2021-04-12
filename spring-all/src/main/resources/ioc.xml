@@ -144,4 +144,25 @@
         <property name="age" value="55"></property>
     </bean>
 
+    <!-- 静态工厂 -->
+    <bean id="personStaticFac" class="com.liuyao.spcld.springall.factory.PersonStaticFactory" factory-method="getInstance"></bean>
+
+    <!-- 实例工厂：先创建工厂实例 再通过其创建实例 -->
+    <bean id="personFactory" class="com.liuyao.spcld.springall.factory.PersonInstanceFactory"></bean>
+    <bean id="personInstanceFac" class="com.liuyao.spcld.springall.eneity.Person" factory-bean="personFactory" factory-method="getInstance"></bean>
+
+    <!-- factorybean 创建实例
+    spring 创建bean方式的补充
+    可以按照需求创建对象，创建的对象交给spring ioc容器来管理
+    使用的时候才会创建
+    -->
+    <bean id="myFactoryBean" class="com.liuyao.spcld.springall.factory.MyFactoryBean"></bean>
+
+    <bean id="person7" class="com.liuyao.spcld.springall.eneity.Person" init-method="init" destroy-method="destroy">
+        <property name="name" value="person7"></property>
+    </bean>
+
+    <!-- 所有bean 初始化 前后 进行增强-->
+    <bean id="myBeanPostProcessor" class="com.liuyao.spcld.springall.processor.MyBeanPostProcessor"></bean>
+
 </beans>
