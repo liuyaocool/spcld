@@ -2,7 +2,14 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+
+">
 
     <!--
         xmlns: xml name space
@@ -164,5 +171,45 @@
 
     <!-- 所有bean 初始化 前后 进行增强-->
     <bean id="myBeanPostProcessor" class="com.liuyao.spcld.springall.processor.MyBeanPostProcessor"></bean>
+
+    <!-- 管理第三方bean -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="root"></property>
+        <property name="password" value="123456"></property>
+        <property name="url" value="jdbc:mysql://192.168.1.161:3306/springcloud"></property>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+    </bean>
+
+    <!-- 配置文件引入第三方bean 头部导入命名空间xmlns:context & xsi-->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <bean id="dataSourceProperties" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driverName}"></property>
+    </bean>
+
+    <bean id="person8" class="com.liuyao.spcld.springall.eneity.Person">
+        <!-- username 可能跟系统变量重名 需要加前缀等 -->
+<!--        <property name="name" value="${username}"></property>-->
+        <property name="name" value="${jdbc.username}"></property>
+    </bean>
+
+    <!-- 自动装配 autowire
+    default/no: 不装配
+    constructor：person构造器必须 只包含 Auth，如果匹配多个Auth bean，再按照id
+    byName: 按照名字装配 通过set方法名装配
+    byType：按照类型 多个bean会报错
+    -->
+    <bean id="person9" class="com.liuyao.spcld.springall.eneity.Person" autowire="constructor"></bean>
+
+    <!-- spel 表达式语言 -->
+    <bean id="person10" class="com.liuyao.spcld.springall.eneity.Person">
+<!--        <property name="name" value="#{auth.roleName}"></property>-->
+        <property name="name" value="#{T(java.util.UUID).randomUUID().toString()}"></property>
+        <property name="hobbies" value="#{auth.getRoleName()}"></property>
+        <property name="id" value="#{12*2}"></property>
+        <property name="auth" value="#{auth}"></property>
+    </bean>
 
 </beans>

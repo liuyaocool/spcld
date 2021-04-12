@@ -23,7 +23,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
             // ...
         }
 
-        System.out.println("before init: " + beanName);
+//        System.out.println("before init: " + beanName);
         return bean;
     }
 
@@ -37,7 +37,7 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
      */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("after init: " + beanName);
+//        System.out.println("after init: " + beanName);
         return bean;
     }
 }

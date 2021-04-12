@@ -1,8 +1,11 @@
 package com.liuyao.spcld.springall;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.liuyao.spcld.springall.eneity.Person;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.sql.SQLException;
 
 public class IOCTest {
 
@@ -11,7 +14,7 @@ public class IOCTest {
     final ClassPathXmlApplicationContext ctx2 = new ClassPathXmlApplicationContext("ioc-depends.xml");
 
     @Test
-    public void test01() {
+    public void test01() throws SQLException {
 //        getBean("person");
 //        getBean("person2");
 //        getBean("person3");
@@ -25,7 +28,16 @@ public class IOCTest {
 //        getBean("personInstanceFac");
 
 //        getBean("myFactoryBean");
-        getBean("person7");
+//        getBean("person7");
+
+//        final DruidDataSource dataSource = getBean("dataSource", DruidDataSource.class);
+//        System.out.println(dataSource.getConnection());
+
+//        final DruidDataSource dataSourceProperties = getBean("dataSourceProperties", DruidDataSource.class);
+//        System.out.println(dataSourceProperties.getConnection());
+
+//        getBean("person8");
+        getBean("person9");
 
 //        ctx.close();
 //        getBean2("person");
@@ -34,17 +46,19 @@ public class IOCTest {
     }
 
     private Person getBean(String name) {
-        final Person person = ctx.getBean(name, Person.class);
-        System.out.println(name + ": " + person);
-        return person;
+        return getBean(ctx, name, Person.class);
+    }
+
+    private <T> T getBean(String name, Class<T> tClass) {
+        return getBean(ctx, name, tClass);
     }
 
     private Person getBean2(String name) {
-        return getBean2(name, Person.class);
+        return getBean(ctx2, name, Person.class);
     }
 
-    private <T> T getBean2(String name, Class<T> clas) {
-        final T person = ctx2.getBean(name, clas);
+    private <T> T getBean(ClassPathXmlApplicationContext appCtx, String name, Class<T> clas) {
+        final T person = appCtx.getBean(name, clas);
         System.out.println(name + ": " + person);
         return person;
     }
