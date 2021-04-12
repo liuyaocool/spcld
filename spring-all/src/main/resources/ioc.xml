@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        xmlns: xml name space
+        xsi: xml schema instance
+        xsd
+    -->
+
+    <bean id="person" class="com.liuyao.spcld.springall.eneity.Person">
+        <!-- 使用的是set方法 -->
+        <property name="name" value="zhangsan"></property>
+    </bean>
+
+    <bean id="person2" class="com.liuyao.spcld.springall.eneity.Person">
+        <!-- 参数列表的值 -->
+        <constructor-arg name="name" value="lisi"></constructor-arg>
+    </bean>
+
+    <bean id="person3" class="com.liuyao.spcld.springall.eneity.Person">
+        <!-- name可以省略 顺序要求一致 -->
+        <constructor-arg value="wang5"></constructor-arg>
+    </bean>
+
+    <!-- p 命名空间 -->
+    <bean id="person4" class="com.liuyao.spcld.springall.eneity.Person" p:id="4" p:name="perosn4"></bean>
+
+    <bean id="auth" class="com.liuyao.spcld.springall.eneity.Auth">
+        <property name="roleId" value="1"></property>
+        <property name="useeId" value="5"></property>
+        <property name="roleName" value="admin"></property>
+    </bean>
+
+    <bean id="person5" class="com.liuyao.spcld.springall.eneity.Person">
+        <property name="id" value="5"></property>
+        <property name="name" value="person5"></property>
+        <!-- 数组赋值 value="book,sport,audio" -->
+        <property name="hobbies">
+            <array>
+                <value>book</value>
+                <value>sport</value>
+                <value>audio</value>
+            </array>
+        </property>
+        <!-- 引用赋值 -->
+        <property name="auth" ref="auth"></property>
+        <!-- List 赋值 value="list1,list2,list3" -->
+        <property name="stringList">
+            <list>
+                <value>list1</value>
+                <value>list2</value>
+                <value>list3</value>
+            </list>
+        </property>
+        <!-- list《obj》赋值 -->
+        <property name="authList">
+            <list>
+                <!-- auth2 无法从ioc容器中获得 -->
+                <bean id="auth2" class="com.liuyao.spcld.springall.eneity.Auth">
+                    <property name="roleId" value="2"></property>
+                    <property name="useeId" value="aurhlist5"></property>
+                    <property name="roleName" value="admin"></property>
+                </bean>
+                <ref bean="auth"></ref>
+            </list>
+        </property>
+        <!-- set赋值 -->
+        <property name="stringSet">
+            <set>
+                <value>set1</value>
+                <value>set2</value>
+                <value>set3</value>
+                <value>set3</value>
+            </set>
+        </property>
+        <!-- map赋值 -->
+        <property name="map">
+            <map>
+                <entry key="map1" value="mapqvalue"></entry>
+                <entry key="auth1" value-ref="auth"></entry>
+                <entry key="objmap">
+                    <bean class="com.liuyao.spcld.springall.eneity.Auth">
+                        <property name="roleId" value="3"></property>
+                        <property name="useeId" value="mapauth"></property>
+                        <property name="roleName" value="admin-user"></property>
+                    </bean>
+                </entry>
+                <entry>
+                    <key><value>etkey</value></key>
+                    <value>etval</value>
+                </entry>
+                <entry key="listmap">
+                    <list>
+                        <value>listmap1</value>
+                        <value>listmap2</value>
+                        <value>listmap3</value>
+                        <value>listmap4</value>
+                    </list>
+                </entry>
+            </map>
+        </property>
+        <!-- properties赋值 -->
+        <property name="properties">
+            <props>
+                <prop key="aaa">aaa</prop>
+                <prop key="bbb">bbb</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
