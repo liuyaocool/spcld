@@ -17,6 +17,7 @@ public class Person {
 
 
     public Person() {
+        System.out.println("person created");
     }
 
     public Person(String name) {

@@ -12,7 +12,9 @@
 
     <bean id="person" class="com.liuyao.spcld.springall.eneity.Person">
         <!-- 使用的是set方法 -->
+        <property name="id" value="1"></property>
         <property name="name" value="zhangsan"></property>
+        <property name="age" value="16"></property>
     </bean>
 
     <bean id="person2" class="com.liuyao.spcld.springall.eneity.Person">
@@ -109,6 +111,19 @@
                 <prop key="bbb">bbb</prop>
             </props>
         </property>
+    </bean>
+
+    <!-- abstract="true" 将不会实例化 -->
+    <bean id="parent" class="com.liuyao.spcld.springall.eneity.Person">
+        <!-- 使用的是set方法 -->
+        <property name="id" value="1"></property>
+        <property name="name" value="parent"></property>
+        <property name="age" value="55"></property>
+    </bean>
+
+    <!-- 继承 属性值 -->
+    <bean id="son" class="com.liuyao.spcld.springall.eneity.Person" parent="parent">
+        <property name="name" value="son"></property>
     </bean>
 
 </beans>
