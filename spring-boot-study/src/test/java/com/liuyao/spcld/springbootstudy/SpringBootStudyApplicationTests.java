@@ -1,5 +1,6 @@
 package com.liuyao.spcld.springbootstudy;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +20,10 @@ class SpringBootStudyApplicationTests {
         System.out.println(dataSource.getClass());
         final Connection connection = dataSource.getConnection();
         System.out.println(connection);
+
+        DruidDataSource druidDataSource = (DruidDataSource) dataSource;
+        System.out.println("maxactive: " + druidDataSource.getMaxActive());
+
         connection.close();
 
     }
