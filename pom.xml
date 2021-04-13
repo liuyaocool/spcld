@@ -46,6 +46,7 @@
         <module>demo</module>
         <module>utils</module>
         <module>spring-all</module>
+        <module>spring-boot-study</module>
     </modules>
 
 

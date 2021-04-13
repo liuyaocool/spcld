@@ -13,6 +13,7 @@ public class ProxyTest {
 
         final Calculator calculator = MyProxy.getCalculator(new MyCalculator());
         System.out.println(calculator.add(12,14));
+        System.out.println(calculator.getClass());
 
     }
 
