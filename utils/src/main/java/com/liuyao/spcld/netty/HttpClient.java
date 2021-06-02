@@ -1,4 +1,4 @@
-package com.liuyao.spcld;
+package com.liuyao.spcld.netty;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -17,10 +17,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-public class HttpClientByNetty {
+public class HttpClient {
 
     public static void main(String[] args) throws InterruptedException {
-        HttpClientByNetty client = new HttpClientByNetty("localhost", 8101);
+        HttpClient client = new HttpClient("localhost", 8101);
 
         for (int i = 0; i < 10; i++) {
             int finalI = i;
@@ -79,7 +79,7 @@ public class HttpClientByNetty {
     private String ip;
     private int port;
 
-    public HttpClientByNetty(String ip, int port) {
+    public HttpClient(String ip, int port) {
         this.ip = ip;
         this.port = port;
     }

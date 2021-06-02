@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Maincontroller {
 
+    // url 参数 绕过注册中心 直连服务提供者
     @DubboReference(version = "1.0.0")
     IDubboService iDubboService;
 

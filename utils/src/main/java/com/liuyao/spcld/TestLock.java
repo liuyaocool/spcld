@@ -1,23 +1,12 @@
 package com.liuyao.spcld;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.http.*;
-import io.netty.util.AsciiString;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import com.liuyao.spcld.netty.HttpClient;
 
 public class TestLock {
 
     public static void main(String[] args) throws InterruptedException {
-        HttpClientByNetty client = new HttpClientByNetty("localhost", 8101);
+        HttpClient client = new HttpClient("localhost", 8101);
 
         String uri = "/user/postMap";
 

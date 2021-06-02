@@ -1,4 +1,4 @@
-package com.liuyao.spcld;
+package com.liuyao.spcld.netty;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
